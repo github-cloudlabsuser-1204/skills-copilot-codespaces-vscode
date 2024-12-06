@@ -29,3 +29,12 @@ function reverseSentence(sentence) {
         .join(' ')
         .replace(/^\w/, (c) => c.toUpperCase());
 }
+
+const data = [
+    { name: 'Alice', age: 25 },
+    { name: 'Bob', age: 30 },
+    { name: 'Charlie', age: 35 }
+];
+
+const names = data.map(person => person.name);
+console.log(names); // Output: ['Alice', 'Bob', 'Charlie']
