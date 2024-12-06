@@ -4,42 +4,42 @@ class Program
 {
     const int MAX = 100;
 
-     static int Sum(int[] arr, int n)
-     {
-         int result = 0;
-         for (int i = 0; i < n; i++)
-         {
-             result += arr[i];
-         }
-         return result;
-     }
+    static int Sum(int[] arr)
+    {
+        int result = 0;
+        foreach (int num in arr)
+        {
+            result += num;
+        }
+        return result;
+    }
 
-     static void Main()
-     {
-         int n;
-         Console.Write("Enter the number of elements (1-100): ");
-         if (!int.TryParse(Console.ReadLine(), out n) || n < 1 || n > MAX)
-         {
-             Console.WriteLine("Invalid input. Please provide a digit ranging from 1 to 100.");
-             Environment.Exit(1);
-         }
+    static int GetValidNumber(string prompt, int min, int max)
+    {
+        int number;
+        do
+        {
+            Console.Write(prompt);
+        } while (!int.TryParse(Console.ReadLine(), out number) || number < min || number > max);
 
-         int[] arr = new int[n];
+        return number;
+    }
 
-         Console.WriteLine("Enter " + n + " integers:");
-         for (int i = 0; i < n; i++)
-         {
-             if (!int.TryParse(Console.ReadLine(), out arr[i]))
-             {
-                 Console.WriteLine("Invalid input. Please enter valid integers.");
-                 Environment.Exit(1);
-             }
-         }
+    static int[] GetValidIntegers(int count)
+    {
+        int[] arr = new int[count];
+        for (int i = 0; i < count; i++)
+        {
+            arr[i] = GetValidNumber($"Enter integer {i + 1}: ", int.MinValue, int.MaxValue);
+        }
+        return arr;
+    }
 
-         int total = Sum(arr, n);
-
-         Console.WriteLine("Sum of the numbers: " + total);
-
-         // No need to free memory in C#, as it's managed by the runtime.
-     }
- }      
+    static void Main()
+    {
+        int n = GetValidNumber("Enter the number of elements (1-100): ", 1, MAX);
+        int[] arr = GetValidIntegers(n);
+        int total = Sum(arr);
+        Console.WriteLine("Sum of the numbers: " + total);
+    }
+}
