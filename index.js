@@ -21,3 +21,11 @@ export default function MarkdownEditor() {
         </div>
     );
 }
+
+function reverseSentence(sentence) {
+    return sentence
+        .split(' ')
+        .reverse()
+        .join(' ')
+        .replace(/^\w/, (c) => c.toUpperCase());
+}
